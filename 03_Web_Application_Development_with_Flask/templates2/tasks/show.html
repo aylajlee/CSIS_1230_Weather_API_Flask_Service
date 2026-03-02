@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+{% block title %}{{ task.title }} - Task Details{% endblock %}
+
+{% block content %}
+<div class="task-detail">
+    <!-- Navigation breadcrumbs -->
+    <nav class="breadcrumb">
+        <a href="{{ url_for('tasks') }}">← Back to All Tasks</a>
+    </nav>
+
+    <!-- Task Header -->
+    <div class="task-header">
+        <h1>{{ task.title }}</h1>
+        <div class="task-meta">
+            <span class="status-badge {{ 'completed' if task.completed else 'pending' }}">
+                {{ '✅ Completed' if task.completed else '⏳ Pending' }}
+            </span>
+            <span class="task-id">Task #{{ task.id }}</span>
+        </div>
+    </div>
+
+    <!-- Task Description -->
+    <div class="task-description">
+        <h3>Description</h3>
+        {% if task.description %}
+            <p>{{ task.description }}</p>
+        {% else %}
+            <p class="no-description"><em>No description provided</em></p>
+        {% endif %}
+    </div>
+
+    <!-- Task Metadata -->
+    <div class="task-metadata">
+        <h3>Details</h3>
+        <div class="metadata-grid">
+            <div class="metadata-item">
+                <strong>Created:</strong>
+                <span>{{ task.created_at.strftime('%B %d, %Y at %I:%M %p') if task.created_at else 'Unknown' }}</span>
+            </div>
+            <div class="metadata-item">
+                <strong>Status:</strong>
+                <span>{{ 'Completed' if task.completed else 'In Progress' }}</span>
+            </div>
+            <div class="metadata-item">
+                <strong>Task ID:</strong>
+                <span>{{ task.id }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-primary">
+            ✏️ Edit Task
+        </a>
+        
+        <!-- Delete Form -->
+        <form action="{{ url_for('delete_task', task_id=task.id) }}" method="POST" 
+              style="display: inline;" 
+              onsubmit="return confirm('Are you sure you want to delete this task?');">
+            <button type="submit" class="btn btn-danger">
+                🗑️ Delete Task
+            </button>
+        </form>
+
+        
+    </div>
+
+    <!-- Flash Messages -->
+    <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %} -->
+</div>
+
+<style>
+.task-detail {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.breadcrumb {
+    margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+    color: #666;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #333;
+}
+
+.task-header {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.task-header h1 {
+    color: #333;
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+}
+
+.task-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.status-badge.completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.task-id {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.task-description, .task-metadata {
+    margin-bottom: 2rem;
+}
+
+.task-description h3, .task-metadata h3 {
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.no-description {
+    color: #999;
+    font-style: italic;
+}
+
+.metadata-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.metadata-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.metadata-item strong {
+    color: #666;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #eee;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+.alert {
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.flash-messages {
+    margin: 1rem 0;
+}
+</style>
+{% endblock %}  

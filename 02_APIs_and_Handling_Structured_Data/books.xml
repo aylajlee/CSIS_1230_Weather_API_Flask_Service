@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <book id="1" genre="fiction">
+    <title>1984</title>
+    <author>George Orwell</author>
+    <pages>328</pages>
+  </book>
+  <book id="2" genre="nonfiction">
+    <title>Sapiens</title>
+    <author>Yuval Noah Harari</author>
+    <pages>443</pages>
+  </book>
+  <book id="3" genre="fiction">
+    <title>The Hobbit</title>
+    <author>J.R.R. Tolkien</author>
+    <pages>310</pages>
+  </book>
+  <book id="4" genre="fiction">
+    <title>Fahrenheit 451</title>
+    <author>Ray Bradbury</author>
+    <pages>194</pages>
+  </book>
+  <book id="5" genre="nonfiction">
+    <title>Educated</title>
+    <author>Tara Westover</author>
+    <pages>352</pages>
+  </book>
+  <book id="6" genre="history">
+    <title>Guns, Germs, and Steel</title>
+    <author>Jared Diamond</author>
+    <pages>480</pages>
+  </book>
+</library>

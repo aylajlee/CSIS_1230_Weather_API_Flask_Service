@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - {{ username }}{% endblock %}
+
+{% block content %}
+<h2>User Profile</h2>
+<div style="background: #f9f9f9; padding: 1.5rem; border-radius: 5px; margin-top: 1rem;">
+    <p><strong>Username:</strong> {{ username }}</p>
+    <p><strong>Email:</strong> {{ email }}</p>
+</div>
+<p style="margin-top: 1.5rem;">
+    <a href="/" class="btn">← Back to Dashboard</a>
+</p>
+{% endblock %}

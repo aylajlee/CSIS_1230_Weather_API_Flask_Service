@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- templates/tasks/_form.html (partial template) -->
+<form method="POST">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" 
+               value="{{ task.title if task else '' }}" 
+               required maxlength="100">
+        {% if errors and 'title' in errors %}
+            <div class="error">{{ errors.title }}</div>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description">{{ task.description if task else '' }}</textarea>
+    </div>
+    
+    {% if task %}
+        <div class="form-group">
+            <input type="checkbox" id="completed" name="completed" 
+                   {{ 'checked' if task.completed }}>
+            <label for="completed">Completed</label>
+        </div>
+    {% endif %}
+    
+    <button type="submit" class="btn btn-primary">
+        {{ 'Update' if task else 'Create' }} Task
+    </button>
+</form>
+
+ <div class="form-group">
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task.description}}</li>
+        {% endfor %}
+    </ul>
+ </div>
+{% endblock %}  
