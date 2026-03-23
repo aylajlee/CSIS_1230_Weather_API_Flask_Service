@@ -64,10 +64,9 @@ def show_task(task_id):
 
 #### [월요일 수업] March 2nd 2026 
 @app.route('/dashboard')
-def dashboard(task_id):
-    task = task_manager.read(task_id)
-    if not task:
-        abort(404)
+def dashboard():
+    task = task_manager.read()
+    return render_template('dashboard.html', tasks=tasks)
         
 @app.route('/tasks/<int:task_id>/edit', methods=['GET', 'POST'])
 def edit_task(task_id):
