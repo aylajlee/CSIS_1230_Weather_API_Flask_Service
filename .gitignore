@@ -1,0 +1,9 @@
+.venv/
+myenv/
+.classvenv/
+.projectvenv/
+__pycache__/
+my-flask-project/
+venv/
+*.pyc
+.DS_Store
